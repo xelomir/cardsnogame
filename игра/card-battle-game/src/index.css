@@ -1,0 +1,310 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+  background-color: #0f0d15;
+  color: #ead1a1;
+  overflow: hidden;
+  height: 100vh;
+}
+
+:root {
+  --background: 20 17% 7%;
+  --foreground: 39 75% 78%;
+
+  --card-bg: 39 75% 78%;
+  --card-border: 36 36% 38%;
+  --card-title: 6 80% 23%;
+
+  --hero-bg: 6 80% 23%;
+  --hero-border: 36 36% 38%;
+  --hero-text: 39 75% 78%;
+
+  --mana: 221 58% 52%;
+  --mana-text: 220 100% 95%;
+
+  --health: 0 85% 51%;
+  --health-text: 0 0% 100%;
+
+  --attack: 48 100% 51%;
+  --attack-text: 0 0% 100%;
+
+  --button-primary: 36 36% 38%;
+  --button-primary-text: 39 75% 78%;
+
+  --button-secondary: 6 80% 23%;
+  --button-secondary-text: 39 75% 78%;
+
+  --wood-dark: 36 36% 38%;
+  --wood-light: 39 75% 78%;
+
+  --game-bg: 6 80% 23%;
+  --battlefield-bg: 35 17% 35%;
+
+  /* Telegram WebApp Theming */
+  --tg-bg-color: #16171a;
+  --tg-text-color: #ffffff;
+  --tg-button-color: #3d8bfd;
+  --tg-button-text-color: #ffffff;
+  --tg-secondary-bg-color: #232428;
+  --tg-hint-color: #999999;
+  --tg-link-color: #3d8bfd;
+}
+
+/* Dark theme adjustments */
+.tg-dark {
+  --app-bg-color: var(--tg-bg-color, #16171a);
+  --app-text-color: var(--tg-text-color, #ffffff);
+  --app-button-color: var(--tg-button-color, #3d8bfd);
+  --app-button-text-color: var(--tg-button-text-color, #ffffff);
+  --app-card-bg-color: var(--tg-secondary-bg-color, #232428);
+}
+
+/* Light theme adjustments */
+.tg-light {
+  --app-bg-color: var(--tg-bg-color, #f5f5f5);
+  --app-text-color: var(--tg-text-color, #222222);
+  --app-button-color: var(--tg-button-color, #3d8bfd);
+  --app-button-text-color: var(--tg-button-text-color, #ffffff);
+  --app-card-bg-color: var(--tg-secondary-bg-color, #ffffff);
+}
+
+/* Apply Telegram theme to app elements when inside Telegram */
+body.tg-dark .game-board,
+body.tg-light .game-board {
+  background-color: var(--app-bg-color);
+  color: var(--app-text-color);
+}
+
+body.tg-dark .button,
+body.tg-light .button {
+  background-color: var(--app-button-color);
+  color: var(--app-button-text-color);
+}
+
+body.tg-dark .card,
+body.tg-light .card {
+  background-color: var(--app-card-bg-color);
+  color: var(--app-text-color);
+}
+
+/* Стили для карточек */
+.card {
+  @apply relative rounded-lg border-2 shadow-lg transition-all duration-200;
+  background-color: #ead1a1;
+  border-color: #7e6440;
+  font-family: 'Cinzel', serif;
+}
+
+.card-title {
+  @apply font-bold text-center py-1 px-2;
+  color: #561d18;
+}
+
+.card-minion {
+  @apply bg-amber-100;
+}
+
+.card-spell {
+  @apply bg-blue-100;
+}
+
+/* Стиль для карт с провокацией */
+.card-taunt {
+  box-shadow: 0 0 0 2px #ff4500, 0 0 10px #ff4500;
+}
+
+/* Стили для поля боя */
+.battlefield {
+  @apply rounded-lg p-4;
+  background-color: #7e6440;
+}
+
+.hero {
+  @apply relative rounded-lg border-2 shadow-lg flex items-center justify-center;
+  background-color: #561d18;
+  border-color: #9e7f58;
+  color: #ead1a1;
+  font-family: 'Cinzel', serif;
+}
+
+.hero-power {
+  @apply rounded-full border-2 shadow-lg flex items-center justify-center;
+  background-color: #561d18;
+  border-color: #9e7f58;
+  color: #ead1a1;
+}
+
+/* Статы */
+.stat {
+  @apply rounded-full flex items-center justify-center font-bold;
+  font-family: 'Cinzel', serif;
+}
+
+.mana {
+  @apply bg-blue-600 text-white;
+}
+
+.attack {
+  @apply bg-yellow-500 text-white;
+}
+
+.health {
+  @apply bg-red-600 text-white;
+}
+
+/* Кнопки */
+.button {
+  @apply rounded-lg px-4 py-2 font-bold transition-all duration-200;
+  font-family: 'Cinzel', serif;
+}
+
+.button-primary {
+  @apply bg-amber-700 text-amber-100 hover:bg-amber-800;
+}
+
+.button-secondary {
+  @apply bg-red-900 text-amber-100 hover:bg-red-950;
+}
+
+/* Анимации */
+@keyframes card-glow {
+  0% { box-shadow: 0 0 5px #ead1a1; }
+  50% { box-shadow: 0 0 20px #ead1a1; }
+  100% { box-shadow: 0 0 5px #ead1a1; }
+}
+
+.card-playable {
+  animation: card-glow 2s infinite;
+}
+
+/* Анимация для атаки */
+@keyframes attack-animation {
+  0% { transform: scale(1); }
+  25% { transform: scale(1.2) rotate(-5deg); }
+  50% { transform: scale(1) translate(5px, -5px); }
+  75% { transform: scale(0.9) translate(-5px, 5px); }
+  100% { transform: scale(1); }
+}
+
+.animate-attack {
+  animation: attack-animation 0.5s ease-in-out;
+}
+
+/* Анимация для урона */
+@keyframes damage-animation {
+  0% { transform: scale(1); }
+  25% { transform: scale(0.9); filter: brightness(1.5); }
+  50% { transform: scale(1.1) rotate(2deg); filter: brightness(0.8); }
+  75% { transform: scale(0.95) rotate(-2deg); filter: brightness(1.2); }
+  100% { transform: scale(1); filter: brightness(1); }
+}
+
+.animate-damage {
+  animation: damage-animation 0.5s ease-in-out;
+}
+
+/* Анимация для заклинаний */
+@keyframes spell-animation {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.2); opacity: 0.7; filter: hue-rotate(90deg); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.animate-spell {
+  animation: spell-animation 0.8s ease-in-out;
+}
+
+/* Анимация для лечения */
+@keyframes heal-animation {
+  0% { box-shadow: 0 0 0 0 rgba(0, 255, 0, 0.5); }
+  50% { box-shadow: 0 0 20px 5px rgba(0, 255, 0, 0.7); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 255, 0, 0.5); }
+}
+
+.animate-heal {
+  animation: heal-animation 1s ease-in-out;
+}
+
+/* Анимация для смерти */
+@keyframes death-animation {
+  0% { opacity: 1; transform: scale(1) rotate(0); }
+  50% { opacity: 0.5; transform: scale(0.8) rotate(5deg); }
+  100% { opacity: 0; transform: scale(0.1) rotate(15deg); }
+}
+
+.animate-death {
+  animation: death-animation 0.7s ease-in-out forwards;
+}
+
+/* Анимация для призыва */
+@keyframes summon-animation {
+  0% { opacity: 0; transform: scale(0.5); }
+  50% { opacity: 0.7; transform: scale(1.2); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.animate-summon {
+  animation: summon-animation 0.7s ease-in-out;
+}
+
+/* Анимация для усиления */
+@keyframes buff-animation {
+  0% { filter: brightness(1); }
+  50% { filter: brightness(1.5) saturate(1.5); }
+  100% { filter: brightness(1); }
+}
+
+.animate-buff {
+  animation: buff-animation 0.8s ease-in-out;
+}
+
+/* Стили для выбора уровня сложности */
+.difficulty-selector {
+  @apply flex gap-2 justify-center my-4;
+}
+
+.difficulty-btn {
+  @apply px-4 py-2 rounded-lg font-bold transition-all duration-200;
+  font-family: 'Cinzel', serif;
+}
+
+.difficulty-btn.easy {
+  @apply bg-green-600 text-white hover:bg-green-700;
+}
+
+.difficulty-btn.normal {
+  @apply bg-yellow-600 text-white hover:bg-yellow-700;
+}
+
+.difficulty-btn.hard {
+  @apply bg-red-600 text-white hover:bg-red-700;
+}
+
+.difficulty-btn.selected {
+  @apply ring-2 ring-white scale-110;
+}
+
+/* Стили для статистики */
+.stats-panel {
+  @apply bg-amber-900 bg-opacity-50 p-4 rounded-lg border border-amber-700;
+}
+
+.stats-header {
+  @apply text-amber-100 font-bold text-lg mb-2 border-b border-amber-700 pb-2;
+}
+
+.stats-item {
+  @apply flex justify-between text-sm text-amber-100 my-1;
+}
+
+.stats-value {
+  @apply font-bold;
+}
